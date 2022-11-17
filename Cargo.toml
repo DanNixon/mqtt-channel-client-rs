@@ -1,0 +1,36 @@
+[package]
+name = "mqtt-channel-client"
+description = "MQTT client that communicates over Tokio channels"
+version = "0.1.0"
+edition = "2021"
+
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/DanNixon/mqtt-channel-client"
+repository = "https://github.com/DanNixon/mqtt-channel-client"
+
+[features]
+metrics = ["dep:prometheus-client"]
+
+[[example]]
+name = "demo"
+
+[[example]]
+name = "metrics"
+required-features = ["metrics"]
+
+[[example]]
+name = "client_config"
+required-features = ["metrics"]
+
+[dependencies]
+derive_builder = "0.11"
+log = "0.4"
+paho-mqtt = "0.11"
+prometheus-client = { version = "0.18.1", optional = true }
+thiserror = "1.0"
+tokio = { version = "1.21", features = ["rt-multi-thread", "sync", "time"] }
+
+[dev-dependencies]
+env_logger = "0.9"
+tokio = { version = "1.21", features = ["macros", "signal"] }
