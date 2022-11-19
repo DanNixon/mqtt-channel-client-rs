@@ -1,6 +1,7 @@
 # mqtt-channel-client
 
 [![CI](https://github.com/DanNixon/mqtt-channel-client-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/DanNixon/mqtt-channel-client-rs/actions/workflows/ci.yml)
+[![dependency status](https://deps.rs/repo/github/dannixon/mqtt-channel-client-rs/status.svg)](https://deps.rs/repo/github/dannixon/mqtt-channel-client-rs)
 
 MQTT client that communicates over Tokio channels.
 
