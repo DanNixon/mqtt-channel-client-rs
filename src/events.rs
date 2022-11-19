@@ -1,5 +1,3 @@
-//! Event types.
-
 use paho_mqtt::Message;
 
 #[derive(Debug, Clone)]

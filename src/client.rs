@@ -4,7 +4,7 @@ use crate::{
     events::{Event, StatusEvent},
     ClientConfig, Subscription,
 };
-use paho_mqtt::{AsyncClient, ConnectOptions, CreateOptions};
+use paho_mqtt::{AsyncClient, ConnectOptions, CreateOptions, Message};
 #[cfg(feature = "metrics")]
 use prometheus_client::registry::Registry;
 use std::{
@@ -59,6 +59,12 @@ impl Client {
     /// Get a receiving channel for consuming events from the client.
     pub fn rx_channel(&self) -> Receiver<Event> {
         self.tx_channel.subscribe()
+    }
+
+    /// Send a message.
+    pub fn send(&self, msg: Message) -> crate::Result<()> {
+        self.tx_channel.send(Event::Tx(msg))?;
+        Ok(())
     }
 
     /// Add a new subscription.
