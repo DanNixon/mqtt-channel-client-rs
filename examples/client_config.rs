@@ -1,4 +1,4 @@
-use mqtt_channel_client::{events::Event, Client, ClientConfigBuilder, SubscriptionBuilder};
+use mqtt_channel_client::{Client, ClientConfigBuilder, Event, SubscriptionBuilder};
 use paho_mqtt::{
     connect_options::ConnectOptionsBuilder, create_options::CreateOptionsBuilder, Message,
     PersistenceType,

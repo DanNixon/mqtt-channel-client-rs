@@ -1,6 +1,7 @@
 //! MQTT client that communicates over Tokio channels.
 
-pub mod events;
+mod events;
+pub use self::events::{Event, StatusEvent};
 
 mod client;
 pub use self::client::Client;
