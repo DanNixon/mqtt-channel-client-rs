@@ -32,9 +32,8 @@ async fn main() {
         let mut interval = tokio::time::interval(Duration::from_secs(5));
 
         loop {
-            let mut encoded = Vec::new();
+            let mut encoded = String::new();
             encode(&mut encoded, &registry).unwrap();
-            let encoded = std::str::from_utf8(encoded.as_slice()).unwrap().to_string();
             println!("Metrics:\n{}", encoded);
 
             interval.tick().await;

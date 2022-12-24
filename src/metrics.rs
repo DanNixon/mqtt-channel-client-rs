@@ -1,6 +1,6 @@
 use derive_builder::Builder;
 use prometheus_client::{
-    encoding::text::Encode,
+    encoding::{EncodeLabelSet, EncodeLabelValue},
     metrics::{counter::Counter, family::Family},
 };
 
@@ -10,19 +10,19 @@ pub(crate) struct MetricCollection {
     pub(crate) connection_events: Family<ConnectionEventLabels, Counter>,
 }
 
-#[derive(Clone, Hash, PartialEq, Eq, Encode)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, EncodeLabelValue)]
 pub(crate) enum MessageDirection {
     Sent,
     Received,
 }
 
-#[derive(Clone, Hash, PartialEq, Eq, Encode)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, EncodeLabelValue)]
 pub(crate) enum MessageResult {
     Success,
     Failure,
 }
 
-#[derive(Builder, Clone, Hash, PartialEq, Eq, Encode)]
+#[derive(Debug, Builder, Clone, Hash, PartialEq, Eq, EncodeLabelSet)]
 pub(crate) struct MessageLabels {
     direction: MessageDirection,
     topic: String,
@@ -44,14 +44,14 @@ impl MessageLabelsBuilder {
     }
 }
 
-#[derive(Clone, Hash, PartialEq, Eq, Encode)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, EncodeLabelValue)]
 pub(crate) enum ConnectionEvent {
     Connected,
     Disconnected,
     Lost,
 }
 
-#[derive(Clone, Hash, PartialEq, Eq, Encode)]
+#[derive(Debug, Clone, Hash, PartialEq, Eq, EncodeLabelSet)]
 pub(crate) struct ConnectionEventLabels {
     kind: ConnectionEvent,
 }
