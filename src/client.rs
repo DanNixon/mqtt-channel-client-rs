@@ -93,13 +93,13 @@ impl Client {
         registry.register(
             "messages",
             "MQTT messages processed",
-            Box::new(self.metrics.messages.clone()),
+            self.metrics.messages.clone(),
         );
 
         registry.register(
             "connection_events",
             "MQTT broker connection change events",
-            Box::new(self.metrics.connection_events.clone()),
+            self.metrics.connection_events.clone(),
         );
     }
 
