@@ -1,6 +1,7 @@
 use mqtt_channel_client::{Client, ClientConfig, Event, SubscriptionBuilder};
 use paho_mqtt::{
-    connect_options::ConnectOptionsBuilder, create_options::CreateOptionsBuilder, PersistenceType,
+    connect_options::ConnectOptionsBuilder, create_options::CreateOptionsBuilder, Message,
+    PersistenceType,
 };
 use std::time::Duration;
 
@@ -19,14 +20,17 @@ async fn main() {
     )
     .unwrap();
 
-    // Start a task to print events
-    let mut rx = client.rx_channel();
+    // Start a task to process events
+    let tx = client.tx_channel();
     let c2 = client.clone();
-    let event_print_task = tokio::spawn(async move {
+    let processing_task = tokio::spawn(async move {
+        let mut rx = tx.subscribe();
         loop {
             let event = rx.recv().await;
             println!("Event: {:?}", event);
+
             if let Ok(Event::Rx(msg)) = event {
+                // Subscribe to a topic
                 if msg.topic() == "subscribe_to" {
                     c2.subscribe(
                         SubscriptionBuilder::default()
@@ -35,6 +39,14 @@ async fn main() {
                             .unwrap(),
                     );
                 }
+
+                // Send messages
+                tx.send(Event::Tx(Message::new(
+                    format!("received/{}", msg.topic()),
+                    msg.payload(),
+                    msg.qos(),
+                )))
+                .unwrap();
             }
         }
     });
@@ -68,6 +80,6 @@ async fn main() {
     // Disconnect from the broker
     client.stop().await.unwrap();
 
-    // Exit event printer task
-    event_print_task.abort();
+    // Exit event processing task
+    processing_task.abort();
 }

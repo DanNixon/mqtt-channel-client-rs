@@ -10,6 +10,9 @@ pub enum Event {
 
     /// Received an MQTT message.
     Rx(Message),
+
+    /// Terminate client
+    Stop,
 }
 
 /// Meta/status change event.
