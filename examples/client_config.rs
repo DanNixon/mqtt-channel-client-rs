@@ -19,7 +19,6 @@ async fn main() {
             .finalize(),
         ClientConfigBuilder::default()
             .metrics_prefix("another_mqtt".into())
-            .beat_interval(Duration::from_secs(1))
             .build()
             .unwrap(),
     )
