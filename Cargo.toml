@@ -6,8 +6,8 @@ edition = "2021"
 
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/DanNixon/mqtt-channel-client"
-repository = "https://github.com/DanNixon/mqtt-channel-client"
+homepage = "https://github.com/DanNixon/mqtt-channel-client-rs"
+repository = "https://github.com/DanNixon/mqtt-channel-client-rs"
 
 [features]
 metrics = ["dep:prometheus-client"]
