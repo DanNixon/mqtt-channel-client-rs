@@ -11,7 +11,7 @@ async fn main() {
     env_logger::init();
 
     // Create the client
-    let mut client = Client::new(
+    let client = Client::new(
         CreateOptionsBuilder::new()
             .server_uri("tcp://localhost:1883")
             .client_id("demo")

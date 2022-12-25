@@ -104,7 +104,7 @@ impl Client {
     }
 
     /// Start the client using the supplied connection options.
-    pub async fn start(&mut self, options: ConnectOptions) -> crate::Result<()> {
+    pub async fn start(&self, options: ConnectOptions) -> crate::Result<()> {
         if self.handle.lock().await.is_some() {
             return Err(crate::Error::ClientAlreadyStarted);
         }
@@ -265,7 +265,7 @@ impl Client {
     }
 
     /// Request for the client to be stopped and wait for it to terminate.
-    pub async fn stop(&mut self) -> crate::Result<()> {
+    pub async fn stop(&self) -> crate::Result<()> {
         log::trace!("Stopping client");
 
         // Send termination request
