@@ -1,7 +1,9 @@
-use mqtt_channel_client::{Client, ClientConfig, Event, SubscriptionBuilder};
-use paho_mqtt::{
-    connect_options::ConnectOptionsBuilder, create_options::CreateOptionsBuilder, Message,
-    PersistenceType,
+use mqtt_channel_client::{
+    paho_mqtt::{
+        connect_options::ConnectOptionsBuilder, create_options::CreateOptionsBuilder, Message,
+        PersistenceType,
+    },
+    Client, ClientConfig, Event, SubscriptionBuilder,
 };
 use prometheus_client::{encoding::text::encode, registry::Registry};
 use std::time::Duration;

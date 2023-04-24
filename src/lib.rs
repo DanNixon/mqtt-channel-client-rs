@@ -1,5 +1,7 @@
 //! MQTT client that communicates over Tokio channels.
 
+pub use paho_mqtt;
+
 mod events;
 pub use self::events::{Event, StatusEvent};
 
