@@ -16,15 +16,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Setup
-        run: rustup component add clippy rustfmt
+      - uses: cachix/install-nix-action@v20
 
       - name: Format
-        run: cargo fmt -- --check
+        run: |
+          eval "$(nix print-dev-env)"
+          cargo fmt -- --check
 
       - name: Clippy
-        run: cargo clippy --all-features --all-targets -- -Dwarnings
+        run: |
+          eval "$(nix print-dev-env)"
+          cargo clippy --all-features --all-targets -- -Dwarnings
 
   documentation:
     name: Documentation
@@ -32,9 +34,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v20
 
       - name: rustdoc
-        run: cargo doc --all-features
+        run: |
+          eval "$(nix print-dev-env)"
+          cargo doc --all-features
 
   build-and-test:
     name: Build and Test
@@ -42,6 +47,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v20
 
       - name: Build
-        run: cargo build --all-features --all-targets
+        run: |
+          eval "$(nix print-dev-env)"
+          cargo build --all-features --all-targets
