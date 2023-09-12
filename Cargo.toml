@@ -11,6 +11,7 @@ repository = "https://github.com/DanNixon/mqtt-channel-client-rs"
 
 [features]
 metrics = ["dep:prometheus-client"]
+vendored-ssl = ["paho-mqtt/vendored-ssl"]
 
 [[example]]
 name = "demo"
